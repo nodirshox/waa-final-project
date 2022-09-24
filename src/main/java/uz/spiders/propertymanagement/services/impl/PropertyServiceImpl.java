@@ -1,12 +1,20 @@
 package uz.spiders.propertymanagement.services.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import uz.spiders.propertymanagement.dto.AddressDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.entities.Property;
+import uz.spiders.propertymanagement.entities.Property.ListingType;
+import uz.spiders.propertymanagement.entities.Property.PropertyType;
+import uz.spiders.propertymanagement.entities.QProperty;
 import uz.spiders.propertymanagement.repos.PropertyRepository;
 import uz.spiders.propertymanagement.services.PropertyService;
 
@@ -14,6 +22,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -72,5 +81,56 @@ public class PropertyServiceImpl implements PropertyService {
         }
 
         return propertyDTOS;
+    }
+
+    @Override
+    public Page<Property> filter(Pageable page, AddressDTO address, ListingType listing, PropertyType type,
+                                 Integer rooms, Double price) {
+        QProperty property = QProperty.property;
+        List<BooleanExpression> predicates = getPropertyPredicates(property, listing, type, rooms, price);
+        predicates.addAll(getAddressPredicates(property, address));
+
+        if(!predicates.isEmpty()){
+            BooleanExpression finalPredicate = predicates.stream()
+                    .reduce(Expressions.asBoolean(Boolean.valueOf(true)).isTrue(), (p1, p2) -> p1.and(p2));
+            return propertyRepository.findAll(finalPredicate, page);
+        }
+        return propertyRepository.findAll(page);
+    }
+
+    private List<BooleanExpression>  getAddressPredicates(QProperty property, AddressDTO address){
+        List<BooleanExpression> predicates = new ArrayList<>();
+        if(address != null){
+            if(address.getState() != null && !address.getState().isBlank()){
+                predicates.add(property.address.state.equalsIgnoreCase(address.getState()));
+            }
+            if(address.getCity() != null && !address.getCity().isBlank()){
+                predicates.add(property.address.city.equalsIgnoreCase(address.getCity()));
+            }
+            if(address.getStreet() != null && !address.getStreet().isBlank()){
+                predicates.add(property.address.street.equalsIgnoreCase(address.getStreet()));
+            }
+            if(address.getZip() != null && !address.getZip().isBlank()){
+                predicates.add(property.address.zip.eq(address.getZip()));
+            }
+        }
+        return predicates;
+    }
+
+    private List<BooleanExpression> getPropertyPredicates(QProperty property, ListingType listing, PropertyType type, Integer rooms, Double price){
+        List<BooleanExpression> predicates = new ArrayList<>();
+        if(listing != null){
+            predicates.add(property.listingType.eq(listing));
+        }
+        if(type != null){
+            predicates.add(property.type.eq(type));
+        }
+        if(rooms != null){
+            predicates.add(property.numberOfRooms.eq(rooms));
+        }
+        if(price != null){
+            predicates.add(property.price.eq(price));
+        }
+        return predicates;
     }
 }

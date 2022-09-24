@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Embeddable
 public class UserPropertyCompositeId implements Serializable {
 
-    private String propertyId;
+    private Long propertyId;
 
-    private String userId;
+    private Long userId;
 }

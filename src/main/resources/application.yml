@@ -23,9 +23,14 @@ spring:
     init:
       mode: always
 
-
   main:
     allow-bean-definition-overriding: true
+
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        one-indexed-parameters: true
 
 server:
   port: 8080
