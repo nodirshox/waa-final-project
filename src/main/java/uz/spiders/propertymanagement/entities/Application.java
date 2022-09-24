@@ -13,6 +13,12 @@ import java.time.LocalDateTime;
 @Entity
 public class Application {
 
+    public Application(Property property, User user) {
+        this.submittedAt = LocalDateTime.now();
+        this.property = property;
+        this.user = user;
+    }
+
     @EmbeddedId
     private UserPropertyCompositeId id;
 
