@@ -2,7 +2,7 @@ package uz.spiders.propertymanagement.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import uz.spiders.propertymanagement.dto.PropertyDto;
+import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.services.PropertyService;
 
 import javax.validation.Valid;
@@ -16,12 +16,12 @@ public class PropertyController {
     private final PropertyService propertyService;
 
     @PostMapping
-    public PropertyDto create(@Valid @RequestBody PropertyDto propertyDTO) {
+    public PropertyDTO create(@Valid @RequestBody PropertyDTO propertyDTO) {
         return propertyService.create(propertyDTO);
     }
 
-    @GetMapping("/rented")
-    public List<PropertyDto> latestRented() {
+    @GetMapping("/latest-rented")
+    public List<PropertyDTO> latestRented() {
         return propertyService.latestRented();
     }
 

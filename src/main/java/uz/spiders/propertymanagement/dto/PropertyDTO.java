@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PropertyDto {
+public class PropertyDTO {
     private Long id;
 
     @DecimalMin(value = "0.01", message = "The minimum price is 0.01")
