@@ -1,7 +1,6 @@
 package uz.spiders.propertymanagement.services;
 
 
-import uz.spiders.propertymanagement.dto.CreateFavouriteDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 
 import java.util.List;
