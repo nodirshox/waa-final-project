@@ -3,7 +3,7 @@ package uz.spiders.propertymanagement.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import uz.spiders.propertymanagement.dto.PropertyDto;
+import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.repos.PropertyRepository;
 import uz.spiders.propertymanagement.services.PropertyService;
@@ -19,24 +19,24 @@ public class PropertyServiceImpl implements PropertyService {
     private final ModelMapper mapper;
 
     @Override
-    public PropertyDto create(PropertyDto propertyDTO) {
+    public PropertyDTO create(PropertyDTO propertyDTO) {
         propertyDTO.setCreatedAt(LocalDateTime.now());
         propertyDTO.setStatus(Property.PropertyStatus.OPEN);
         var property = mapper.map(propertyDTO, Property.class);
         Property created = propertyRepository.save(property);
-        var newProperty = mapper.map(created, PropertyDto.class);
+        var newProperty = mapper.map(created, PropertyDTO.class);
         return newProperty;
     };
 
     @Override
-    public List<PropertyDto> latestRented() {
-        List<PropertyDto> propertyDtos = new ArrayList<>();
+    public List<PropertyDTO> latestRented() {
+        List<PropertyDTO> propertyDTOS = new ArrayList<>();
         List<Property> properties = propertyRepository.findTop10ByStatusOrderByCreatedAtDesc(Property.PropertyStatus.RENTED);
 
         for (Property property: properties) {
-            propertyDtos.add(mapper.map(property, PropertyDto.class));
+            propertyDTOS.add(mapper.map(property, PropertyDTO.class));
         }
 
-        return propertyDtos;
+        return propertyDTOS;
     }
 }
