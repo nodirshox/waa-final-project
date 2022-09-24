@@ -6,6 +6,7 @@ import uz.spiders.propertymanagement.dto.PropertyDto;
 import uz.spiders.propertymanagement.services.PropertyService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -17,6 +18,11 @@ public class PropertyController {
     @PostMapping
     public PropertyDto create(@Valid @RequestBody PropertyDto propertyDTO) {
         return propertyService.create(propertyDTO);
+    }
+
+    @GetMapping("/rented")
+    public List<PropertyDto> latestRented() {
+        return propertyService.latestRented();
     }
 
 }
