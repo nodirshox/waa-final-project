@@ -8,6 +8,7 @@ import uz.spiders.propertymanagement.entities.User;
 import uz.spiders.propertymanagement.repos.UserRepository;
 import uz.spiders.propertymanagement.services.UserService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,16 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final ModelMapper mapper;
     private final UserRepository userRepository;
+
+    @Override
+    public UserDTO create(UserDTO userDTO) {
+        userDTO.setCreatedAt(LocalDateTime.now());
+        userDTO.setType(User.UserType.CUSTOMER);
+        var user = mapper.map(userDTO, User.class);
+        User created = userRepository.save(user);
+
+        return mapper.map(created, UserDTO.class);
+    }
 
     @Override
     public List<UserDTO> latestCustomers() {

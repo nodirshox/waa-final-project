@@ -34,5 +34,4 @@ public class PropertyController {
     public List<PropertyDTO> latestRented() {
         return propertyService.latestRented();
     }
-
 }
