@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface PropertyService {
     PropertyDTO create(PropertyDTO propertyDTO);
+    PropertyDTO getById(Long id);
+    PropertyDTO update(Long id, PropertyDTO propertyDTO);
     List<PropertyDTO> latestRented();
 }

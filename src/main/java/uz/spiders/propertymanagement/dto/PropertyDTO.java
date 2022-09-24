@@ -36,6 +36,7 @@ public class PropertyDTO {
     private Property.PropertyType type;
 
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @Valid
     private AddressDTO address;
