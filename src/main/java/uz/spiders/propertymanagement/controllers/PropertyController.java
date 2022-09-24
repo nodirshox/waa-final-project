@@ -1,24 +1,22 @@
 package uz.spiders.propertymanagement.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import uz.spiders.propertymanagement.dto.PropertyDto;
 import uz.spiders.propertymanagement.services.PropertyService;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin
-@RequestMapping("/api/properties")
+@RequiredArgsConstructor
+@RequestMapping("/properties")
 public class PropertyController {
-    private PropertyService propertyService;
-
-    @Autowired
-    public PropertyController(PropertyService propertyService) {
-        this.propertyService = propertyService;
-    }
+    private final PropertyService propertyService;
 
     @PostMapping
-    public void create(@RequestBody PropertyDto propertyDTO) {
-        propertyService.create(propertyDTO);
+    public PropertyDto create(@Valid @RequestBody PropertyDto propertyDTO) {
+        return propertyService.create(propertyDTO);
     }
 
 }
