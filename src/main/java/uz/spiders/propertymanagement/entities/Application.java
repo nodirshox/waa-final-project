@@ -2,6 +2,7 @@ package uz.spiders.propertymanagement.entities;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -10,10 +11,12 @@ import javax.persistence.MapsId;
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Application {
 
     public Application(Property property, User user) {
+        this.id = new UserPropertyCompositeId();
         this.submittedAt = LocalDateTime.now();
         this.property = property;
         this.user = user;

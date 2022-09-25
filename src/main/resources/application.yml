@@ -32,6 +32,22 @@ spring:
         default-page-size: 10
         one-indexed-parameters: true
 
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: waa.final.testing@gmail.com
+    password: geruxugllnrhwboi
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  activemq:
+    broker-url: tcp://localhost:61616
+
 server:
   port: 8080
   error:
@@ -40,3 +56,11 @@ server:
   servlet:
     context-path: /api
 
+
+queues:
+  email-queue: email-queue
+logging:
+  level:
+    uz:
+      spiders:
+        propertymanagement: debug

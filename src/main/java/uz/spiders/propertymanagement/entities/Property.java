@@ -40,6 +40,9 @@ public class Property {
     @OneToMany(mappedBy = "property")
     private List<Picture> pictures;
 
+    @ManyToOne
+    private User owner;
+
     public static enum PropertyType{
         HOUSE,
         CONDO,
