@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO create(UserDTO userDTO) {
         userDTO.setCreatedAt(LocalDateTime.now());
+//        TODO: make user type setting dynamic or add another default type
         userDTO.setType(User.UserType.CUSTOMER);
         var user = mapper.map(userDTO, User.class);
         User created = userRepository.save(user);
@@ -38,5 +39,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return userDTOS;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

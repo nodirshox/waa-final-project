@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import uz.spiders.propertymanagement.entities.Application;
 import uz.spiders.propertymanagement.services.ApplicationService;
 
-import javax.validation.Valid;
-
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor

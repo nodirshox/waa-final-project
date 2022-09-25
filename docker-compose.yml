@@ -12,5 +12,11 @@ services:
       - postgres:/data/postgres
     ports:
       - "5433:5432"
+
+  activemq:
+    container_name: activemq
+    image: rmohr/activemq
+    ports:
+      - "61616:61616"
 volumes:
   postgres:

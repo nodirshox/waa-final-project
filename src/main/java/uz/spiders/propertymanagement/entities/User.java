@@ -14,6 +14,10 @@ public class User {
     @GeneratedValue
     private Long id;
 
+    private String email;
+
+    private String password;
+
     private String name;
 
     @Enumerated
@@ -23,6 +27,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<PropertyView> views;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Property> properties;
 
     @ManyToMany
     private List<Property> favouriteProperties;

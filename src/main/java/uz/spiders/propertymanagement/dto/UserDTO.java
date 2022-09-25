@@ -18,6 +18,8 @@ public class UserDTO {
 
     private String name;
 
+    private String email;
+
     @Enumerated
     private User.UserType type;
 
