@@ -3,6 +3,7 @@ package uz.spiders.propertymanagement.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ public class Application {
     @EmbeddedId
     private UserPropertyCompositeId id;
 
+    @CreationTimestamp
     private LocalDateTime submittedAt;
 
     private LocalDateTime deletedAt = null;
