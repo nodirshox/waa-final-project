@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.spiders.propertymanagement.dto.AddressDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
+import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
@@ -43,6 +44,11 @@ public class PropertyController {
     @PutMapping("/{id}")
     public PropertyDTO update(@PathVariable Long id, @RequestBody PropertyDTO propertyDTO) {
         return propertyService.update(id, propertyDTO);
+    }
+
+    @PatchMapping("/{id}")
+    public PropertyDTO partialUpdate(@PathVariable Long id, @RequestBody PropertyPartialUpdateDTO propertyDTO) {
+        return propertyService.partialUpdate(id, propertyDTO);
     }
 
     @GetMapping("/latest-rented")

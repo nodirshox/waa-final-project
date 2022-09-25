@@ -1,6 +1,8 @@
 package uz.spiders.propertymanagement.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,8 +30,10 @@ public class Property {
     @Enumerated
     private PropertyStatus status;
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     private LocalDateTime updatedAt = null;
 
     private LocalDateTime deletedAt = null;

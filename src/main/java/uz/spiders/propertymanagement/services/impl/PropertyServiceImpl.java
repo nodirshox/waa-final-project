@@ -11,18 +11,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import uz.spiders.propertymanagement.dto.AddressDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
+import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
 import uz.spiders.propertymanagement.entities.QProperty;
+import uz.spiders.propertymanagement.exceptions.ResourceNotFoundException;
 import uz.spiders.propertymanagement.repos.PropertyRepository;
 import uz.spiders.propertymanagement.services.PropertyService;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -96,6 +100,33 @@ public class PropertyServiceImpl implements PropertyService {
             return propertyRepository.findAll(finalPredicate, page);
         }
         return propertyRepository.findAll(page);
+    }
+
+    @Override
+    public PropertyDTO partialUpdate(Long id, PropertyPartialUpdateDTO propertyDTO) {
+        Optional<Property> optionalProperty = propertyRepository.findById(id);
+        if(optionalProperty.isPresent()){
+            Property property = optionalProperty.get();
+            if(propertyDTO.getListingType() != null){
+                property.setListingType(propertyDTO.getListingType());
+            }
+            if(propertyDTO.getPrice() != null){
+                property.setPrice(propertyDTO.getPrice());
+            }
+            if(propertyDTO.getNumberOfRooms() != null){
+                property.setNumberOfRooms(propertyDTO.getNumberOfRooms());
+            }
+            if(propertyDTO.getStatus() != null){
+                property.setStatus(propertyDTO.getStatus());
+            }
+            if(propertyDTO.getType() != null){
+                property.setType(propertyDTO.getType());
+            }
+            property = propertyRepository.save(property);
+            return mapper.map(property, PropertyDTO.class);
+        }else{
+            throw new ResourceNotFoundException("Property with id = " + id + " does not exist");
+        }
     }
 
     private List<BooleanExpression>  getAddressPredicates(QProperty property, AddressDTO address){
