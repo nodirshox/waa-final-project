@@ -56,6 +56,12 @@ server:
   servlet:
     context-path: /api
 
+keycloak:
+  realm: master
+  auth-server-url: http://localhost:8081
+  resource: master
+  public-client: true
+  bearer-only: true
 
 queues:
   email-queue: email-queue
