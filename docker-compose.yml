@@ -21,7 +21,9 @@ services:
     container_name: rental-keycloak
     depends_on:
       - postgres
-    command: start-dev
+    volumes:
+      - ./imports:/opt/jboss/keycloak/imports
+    command: start-dev -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: 123456
