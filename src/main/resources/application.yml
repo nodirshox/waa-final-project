@@ -57,7 +57,7 @@ server:
     context-path: /api
 
 keycloak:
-  realm: master
+  realm: waa-property
   auth-server-url: http://localhost:8081
   resource: master
   public-client: true
