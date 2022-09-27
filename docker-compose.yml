@@ -1,22 +1,52 @@
 version: '3.8'
+
 services:
-  db:
+  postgres:
     container_name: pg_container
-    image: postgres
+    image: postgres:14
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     volumes:
-      - postgres:/data/postgres
+      - postgres_db:/var/lib/postgresql/data
     ports:
       - "5433:5432"
+    networks:
+      - rental-project
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:19.0.1
+    container_name: rental-keycloak
+    depends_on:
+      - postgres
+    command: start-dev
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: 123456
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: 123456
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - 8081:8080
+    restart: unless-stopped
+    networks:
+      - rental-project
 
   activemq:
     container_name: activemq
     image: rmohr/activemq
     ports:
       - "61616:61616"
+
 volumes:
-  postgres:
+  postgres_db:
+    driver: local
+
+networks:
+  rental-project:
