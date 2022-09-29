@@ -17,9 +17,9 @@ public class PropertyManagementApplication {
 
 	@Bean
 	protected Keycloak keycloakAdminInstance() {
-		return KeycloakBuilder.builder().serverUrl(authKeycloakUrl).realm("master")
+		return KeycloakBuilder.builder().serverUrl(authKeycloakUrl).realm("waa-property")
 				.grantType(OAuth2Constants.PASSWORD)
-				.username("admin").password("123456").clientId("spring-boot").build();
+				.username("admin").password("123456").clientId("waa-property-client").build();
 	}
 
 
