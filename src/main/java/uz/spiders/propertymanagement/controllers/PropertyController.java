@@ -58,8 +58,7 @@ public class PropertyController {
         return propertyService.latestRented();
     }
 
-    @PatchMapping("/{id}/images")
-    @RolesAllowed({ "owner" })
+    @PatchMapping("/{id}/images") //@RolesAllowed({ "owner" })
     public PropertyDTO updateImages(@PathVariable Long id, @RequestBody List<PictureDTO> pictureDTOS) {
         return propertyService.updateImages(id, pictureDTOS);
     }

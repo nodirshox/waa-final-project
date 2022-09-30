@@ -3,11 +3,14 @@ package uz.spiders.propertymanagement.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import uz.spiders.propertymanagement.dto.UserDTO;
 import uz.spiders.propertymanagement.entities.User;
+import uz.spiders.propertymanagement.exceptions.BadRequestException;
 import uz.spiders.propertymanagement.repos.UserRepository;
 import uz.spiders.propertymanagement.services.UserService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO create(UserDTO userDTO) {
+        if (userRepository.findAllByEmail(userDTO.getEmail()).size() > 0) {
+            throw new BadRequestException("User is already registered");
+        }
         userDTO.setCreatedAt(LocalDateTime.now());
-//        TODO: make user type setting dynamic or add another default type
-        userDTO.setType(User.UserType.CUSTOMER);
         var user = mapper.map(userDTO, User.class);
         User created = userRepository.save(user);
 
@@ -44,5 +48,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> getAllByEmail(String email) {
+        return userRepository.findAllByEmail(email);
     }
 }
