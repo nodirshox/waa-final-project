@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import uz.spiders.propertymanagement.dto.AddressDTO;
+import uz.spiders.propertymanagement.dto.PictureDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
+import uz.spiders.propertymanagement.entities.Picture;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
@@ -20,12 +22,10 @@ import uz.spiders.propertymanagement.exceptions.ResourceNotFoundException;
 import uz.spiders.propertymanagement.repos.PropertyRepository;
 import uz.spiders.propertymanagement.services.PropertyService;
 
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -163,5 +163,20 @@ public class PropertyServiceImpl implements PropertyService {
             predicates.add(property.price.eq(price));
         }
         return predicates;
+    }
+
+    @Transactional
+    @Override
+    public PropertyDTO updateImages(Long id, List<PictureDTO> pictureDTOS) {
+        Property property = propertyRepository.findById(id).orElse(null);
+        if (property == null) {
+            throw new ResourceNotFoundException("Property with id = " + id + " does not exist");
+        }
+
+        for(PictureDTO img : pictureDTOS) {
+            property.addPicture(mapper.map(img, Picture.class));
+        }
+
+        return mapper.map(property, PropertyDTO.class);
     }
 }

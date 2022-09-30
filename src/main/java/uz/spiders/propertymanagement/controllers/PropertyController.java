@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.spiders.propertymanagement.dto.AddressDTO;
+import uz.spiders.propertymanagement.dto.PictureDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
 import uz.spiders.propertymanagement.entities.Property;
@@ -56,5 +57,10 @@ public class PropertyController {
     @RolesAllowed({ "customer" })
     public List<PropertyDTO> latestRented() {
         return propertyService.latestRented();
+    }
+
+    @PatchMapping("/{id}/images")
+    public PropertyDTO updateImages(@PathVariable Long id, @RequestBody List<PictureDTO> pictureDTOS) {
+        return propertyService.updateImages(id, pictureDTOS);
     }
 }

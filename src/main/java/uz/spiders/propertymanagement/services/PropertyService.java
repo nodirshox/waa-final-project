@@ -4,6 +4,7 @@ package uz.spiders.propertymanagement.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import uz.spiders.propertymanagement.dto.AddressDTO;
+import uz.spiders.propertymanagement.dto.PictureDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
 import uz.spiders.propertymanagement.entities.Property;
@@ -23,4 +24,6 @@ public interface PropertyService {
                                  PropertyType type, Integer rooms, Double price);
 
     PropertyDTO partialUpdate(Long id, PropertyPartialUpdateDTO propertyDTO);
+
+    PropertyDTO updateImages(Long id, List<PictureDTO> pictureDTOS);
 }

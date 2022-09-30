@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.spiders.propertymanagement.entities.Picture;
 import uz.spiders.propertymanagement.entities.Property;
 
 import javax.persistence.Enumerated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -37,6 +39,7 @@ public class PropertyDTO {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private List<PictureDTO> pictures;
 
     @Valid
     private AddressDTO address;
