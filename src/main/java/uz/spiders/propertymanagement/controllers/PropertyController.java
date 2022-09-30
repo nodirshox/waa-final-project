@@ -54,12 +54,12 @@ public class PropertyController {
     }
 
     @GetMapping("/latest-rented")
-    @RolesAllowed({ "customer" })
     public List<PropertyDTO> latestRented() {
         return propertyService.latestRented();
     }
 
     @PatchMapping("/{id}/images")
+    @RolesAllowed({ "owner" })
     public PropertyDTO updateImages(@PathVariable Long id, @RequestBody List<PictureDTO> pictureDTOS) {
         return propertyService.updateImages(id, pictureDTOS);
     }

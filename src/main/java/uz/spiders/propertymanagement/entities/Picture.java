@@ -1,5 +1,6 @@
 package uz.spiders.propertymanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ public class Picture {
     private PictureType type;
 
     @ManyToOne
+    @JsonBackReference
     private Property property;
 
     public static enum PictureType{

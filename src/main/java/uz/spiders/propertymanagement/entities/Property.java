@@ -1,5 +1,6 @@
 package uz.spiders.propertymanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -42,6 +43,7 @@ public class Property {
     private Address address;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     private List<Picture> pictures;
 
     @ManyToOne
