@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileUploadResponseDTO {
-    private String url;
+    private String awsUrl;
 }

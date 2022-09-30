@@ -41,7 +41,7 @@ public class Property {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Address address;
 
-    @OneToMany(mappedBy = "property")
+    @OneToMany(mappedBy = "property", cascade = CascadeType.PERSIST)
     private List<Picture> pictures;
 
     @ManyToOne
@@ -63,5 +63,10 @@ public class Property {
     public static enum ListingType{
         RENT,
         SALE
+    }
+
+    public void addPicture(Picture picture) {
+        pictures.add(picture);
+        picture.setProperty(this);
     }
 }
