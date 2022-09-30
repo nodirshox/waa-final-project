@@ -10,4 +10,5 @@ public interface UserService {
     List<UserDTO> latestCustomers();
 
     List<User> getAll();
+    List<User> getAllByEmail(String email);
 }

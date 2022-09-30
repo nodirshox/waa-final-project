@@ -30,4 +30,9 @@ public class UserController {
     public List<UserDTO> latestCustomers() {
         return userService.latestCustomers();
     }
+
+    @GetMapping(path = "/email")
+    public List<User> getAll(@Valid @RequestParam String email) {
+        return userService.getAllByEmail(email);
+    }
 }
