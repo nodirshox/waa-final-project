@@ -41,6 +41,9 @@ public class PropertyDTO {
     private LocalDateTime updatedAt;
     private List<PictureDTO> pictures;
 
+    private String OwnerEmail;
+    private UserDTO owner;
+
     @Valid
     private AddressDTO address;
 }

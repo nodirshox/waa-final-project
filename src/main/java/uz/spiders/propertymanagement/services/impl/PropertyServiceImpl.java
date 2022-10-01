@@ -18,8 +18,11 @@ import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
 import uz.spiders.propertymanagement.entities.QProperty;
+import uz.spiders.propertymanagement.entities.User;
+import uz.spiders.propertymanagement.exceptions.BadRequestException;
 import uz.spiders.propertymanagement.exceptions.ResourceNotFoundException;
 import uz.spiders.propertymanagement.repos.PropertyRepository;
+import uz.spiders.propertymanagement.repos.UserRepository;
 import uz.spiders.propertymanagement.services.PropertyService;
 
 import javax.transaction.Transactional;
@@ -32,13 +35,22 @@ import java.util.Optional;
 @Service
 public class PropertyServiceImpl implements PropertyService {
     private final PropertyRepository propertyRepository;
+    private final UserRepository userRepository;
     private final ModelMapper mapper;
 
     @Override
+    @Transactional
     public PropertyDTO create(PropertyDTO propertyDTO) {
+        User existingUser = userRepository.getByEmail(propertyDTO.getOwnerEmail());
+
+        if (existingUser == null || !existingUser.getType().equals(User.UserType.OWNER)) {
+            throw new BadRequestException("User not found");
+        }
+
         propertyDTO.setCreatedAt(LocalDateTime.now());
         propertyDTO.setStatus(Property.PropertyStatus.OPEN);
         var property = mapper.map(propertyDTO, Property.class);
+        property.setOwner(existingUser);
         Property created = propertyRepository.save(property);
         var newProperty = mapper.map(created, PropertyDTO.class);
         return newProperty;
