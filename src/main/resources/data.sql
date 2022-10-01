@@ -20,21 +20,21 @@ INSERT INTO address (id, city, state, street, zip) values (1002, 'Miami', 'FL', 
 INSERT INTO address (id, city, state, street, zip) values (1003, 'San Francisco', 'CA', '4438 17th St', '94114');
 
 /* PROPERTY */
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1001, 999, 3, 0, 0, 1, 1001, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1002, 699, 2, 1, 1, 0, 1002, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1003, 599, 4, 2, 2, 1, 1003, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (1001, 999, 3, 0, 0, 1, 1001, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (1002, 699, 2, 1, 1, 0, 1002, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (1003, 599, 4, 2, 2, 1, 1003, 1002, current_timestamp);
 
 /* 10 RENTED PROPERTIES */
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2001, 599, 4, 2, 0, 0, 1001, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2002, 699, 3, 2, 1, 1, 1002, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2003, 299, 1, 2, 2, 0, 1003, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2004, 599, 4, 2, 0, 0, 1001, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2005, 699, 3, 2, 1, 1, 1002, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2006, 299, 1, 2, 2, 0, 1003, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2007, 599, 4, 2, 0, 0, 1001, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2008, 699, 3, 2, 1, 1, 1002, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2009, 299, 1, 2, 2, 0, 1003, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2010, 299, 1, 2, 2, 0, 1003, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2001, 599, 4, 2, 0, 0, 1001, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2002, 699, 3, 2, 1, 1, 1002, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2003, 299, 1, 2, 2, 0, 1003, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2004, 599, 4, 2, 0, 0, 1001, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2005, 699, 3, 2, 1, 1, 1002, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2006, 299, 1, 2, 2, 0, 1003, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2007, 599, 4, 2, 0, 0, 1001, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2008, 699, 3, 2, 1, 1, 1002, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2009, 299, 1, 2, 2, 0, 1003, 1002, current_timestamp);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id, created_at) values (2010, 299, 1, 2, 2, 0, 1003, 1002, current_timestamp);
 
 /* PICTURES */
 INSERT INTO picture (id, aws_url, type, property_id) values (1001, 'https://waa-project.s3.amazonaws.com/1664543431763-1.jpg', 1, 1001);
@@ -57,5 +57,10 @@ INSERT INTO picture (id, aws_url, type, property_id) values (1015, 'https://waa-
 INSERT INTO picture (id, aws_url, type, property_id) values (1016, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2008);
 
 /* USER FAVOURITES PROPERTIES */
-INSERT INTO users_favourite_properties(users_id, favourite_properties_id) values (2001, 1002);
-INSERT INTO users_favourite_properties(users_id, favourite_properties_id) values (2001, 1003);
+INSERT INTO users_favourite_properties (users_id, favourite_properties_id) values (2001, 1002);
+INSERT INTO users_favourite_properties (users_id, favourite_properties_id) values (2001, 1003);
+
+/* APPLICATIONS */
+INSERT INTO application (user_id, property_id, submitted_at) values (2001, 1001, current_timestamp);
+INSERT INTO application (user_id, property_id, submitted_at) values (2002, 1002, current_timestamp);
+INSERT INTO application (user_id, property_id, submitted_at) values (2003, 1003, current_timestamp);

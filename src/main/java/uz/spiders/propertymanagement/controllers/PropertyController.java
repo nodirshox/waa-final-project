@@ -8,6 +8,7 @@ import uz.spiders.propertymanagement.dto.AddressDTO;
 import uz.spiders.propertymanagement.dto.PictureDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
+import uz.spiders.propertymanagement.dto.requestDTO.GetOwnerPropertiesDTO;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
@@ -60,5 +61,10 @@ public class PropertyController {
     @PatchMapping("/{id}/images") //@RolesAllowed({ "owner" })
     public PropertyDTO updateImages(@PathVariable Long id, @RequestBody List<PictureDTO> pictureDTOS) {
         return propertyService.updateImages(id, pictureDTOS);
+    }
+
+    @PostMapping("/owner")
+    public List<Property> findAll(@RequestBody GetOwnerPropertiesDTO getOwnerPropertiesDTO) {
+        return propertyService.findOwnerProperties(getOwnerPropertiesDTO);
     }
 }
