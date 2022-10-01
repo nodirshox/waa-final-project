@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
+import uz.spiders.propertymanagement.dto.requestDTO.CreateFavouriteDTO;
+import uz.spiders.propertymanagement.dto.requestDTO.DeleteFavouriteDTO;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.User;
 import uz.spiders.propertymanagement.repos.PropertyRepository;
@@ -25,28 +27,29 @@ public class FavouriteServiceImpl implements FavouriteService {
 
     @Transactional
     @Override
-    public void create(Long userId, Long propertyId) {
-        User user = userRepository.findById(userId).orElse(null);
+    public void create(CreateFavouriteDTO createFavouriteDTO, Long propertyId) {
+        User existingUser = userRepository.getByEmail(createFavouriteDTO.getEmail());
+
         Property property = propertyRepository.findById(propertyId).orElse(null);
 
-        if (user == null || property == null) {
+        if (existingUser == null || property == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The property or user not found");
         }
 
-        if (user.getType() != User.UserType.CUSTOMER) {
+        if (existingUser.getType() != User.UserType.CUSTOMER) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Only CUSTOMER can create favourite property");
         }
 
-        if (user.getFavouriteProperties().contains(property)) {
+        if (existingUser.getFavouriteProperties().contains(property)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The property is already in favourite list of user");
         }
 
-        user.getFavouriteProperties().add(property);
+        existingUser.getFavouriteProperties().add(property);
     };
 
     @Override
-    public List<PropertyDTO> findAll(Long userId) {
-        User user = userRepository.findById(userId).orElse(null);
+    public List<PropertyDTO> findAll(String email) {
+        User user = userRepository.getByEmail(email);
 
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The user not found");
@@ -63,8 +66,8 @@ public class FavouriteServiceImpl implements FavouriteService {
 
     @Override
     @Transactional
-    public void delete(Long userId, Long propertyId) {
-        User user = userRepository.findById(userId).orElse(null);
+    public void delete(DeleteFavouriteDTO deleteFavouriteDTO, Long propertyId) {
+        User user = userRepository.getByEmail(deleteFavouriteDTO.getEmail());
         Property property = propertyRepository.findById(propertyId).orElse(null);
 
         if (user == null || property == null) {

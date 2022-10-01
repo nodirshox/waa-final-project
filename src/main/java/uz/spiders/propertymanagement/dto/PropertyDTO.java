@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.spiders.propertymanagement.entities.Picture;
 import uz.spiders.propertymanagement.entities.Property;
 
 import javax.persistence.Enumerated;
@@ -42,7 +41,6 @@ public class PropertyDTO {
     private List<PictureDTO> pictures;
 
     private String OwnerEmail;
-    private UserDTO owner;
 
     @Valid
     private AddressDTO address;

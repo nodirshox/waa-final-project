@@ -12,7 +12,6 @@ import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
 import uz.spiders.propertymanagement.services.PropertyService;
-import javax.annotation.security.RolesAllowed;
 
 import javax.validation.Valid;
 import java.util.List;
