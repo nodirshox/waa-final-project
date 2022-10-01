@@ -21,8 +21,20 @@ INSERT INTO address (id, city, state, street, zip) values (1003, 'San Francisco'
 
 /* PROPERTY */
 INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1001, 999, 3, 0, 0, 1, 1001, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1002, 699, 2, 0, 1, 0, 1002, 1002);
-INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1003, 599, 4, 0, 2, 1, 1003, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1002, 699, 2, 1, 1, 0, 1002, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (1003, 599, 4, 2, 2, 1, 1003, 1002);
+
+/* 10 RENTED PROPERTIES */
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2001, 599, 4, 2, 0, 0, 1001, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2002, 699, 3, 2, 1, 1, 1002, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2003, 299, 1, 2, 2, 0, 1003, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2004, 599, 4, 2, 0, 0, 1001, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2005, 699, 3, 2, 1, 1, 1002, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2006, 299, 1, 2, 2, 0, 1003, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2007, 599, 4, 2, 0, 0, 1001, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2008, 699, 3, 2, 1, 1, 1002, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2009, 299, 1, 2, 2, 0, 1003, 1002);
+INSERT INTO property (id, price, number_of_rooms, status, type, listing_Type, address_id, owner_id) values (2010, 299, 1, 2, 2, 0, 1003, 1002);
 
 /* PICTURES */
 INSERT INTO picture (id, aws_url, type, property_id) values (1001, 'https://waa-project.s3.amazonaws.com/1664543431763-1.jpg', 1, 1001);
@@ -34,6 +46,15 @@ INSERT INTO picture (id, aws_url, type, property_id) values (1005, 'https://waa-
 INSERT INTO picture (id, aws_url, type, property_id) values (1006, 'https://waa-project.s3.amazonaws.com/1664547767171-4.jpg', 1, 1002);
 INSERT INTO picture (id, aws_url, type, property_id) values (1007, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 0, 1002);
 INSERT INTO picture (id, aws_url, type, property_id) values (1008, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 1003);
+
+INSERT INTO picture (id, aws_url, type, property_id) values (1009, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2001);
+INSERT INTO picture (id, aws_url, type, property_id) values (1010, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2002);
+INSERT INTO picture (id, aws_url, type, property_id) values (1011, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2003);
+INSERT INTO picture (id, aws_url, type, property_id) values (1012, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2004);
+INSERT INTO picture (id, aws_url, type, property_id) values (1013, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2005);
+INSERT INTO picture (id, aws_url, type, property_id) values (1014, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2006);
+INSERT INTO picture (id, aws_url, type, property_id) values (1015, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2007);
+INSERT INTO picture (id, aws_url, type, property_id) values (1016, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 2008);
 
 /* USER FAVOURITES PROPERTIES */
 INSERT INTO users_favourite_properties(users_id, favourite_properties_id) values (2001, 1002);
