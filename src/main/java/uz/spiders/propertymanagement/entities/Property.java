@@ -1,5 +1,6 @@
 package uz.spiders.propertymanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -46,7 +47,8 @@ public class Property {
     @JsonManagedReference
     private List<Picture> pictures;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference
     private User owner;
 
     public static enum PropertyType{

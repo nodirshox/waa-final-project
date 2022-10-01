@@ -1,5 +1,6 @@
 package uz.spiders.propertymanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,14 +11,11 @@ import java.util.List;
 @Data
 @Entity(name = "users")
 public class User {
-
     @Id
     @GeneratedValue
     private Long id;
 
     private String email;
-
-    private String password;
 
     private String name;
 
@@ -30,7 +28,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<PropertyView> views;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     private List<Property> properties;
 
     @ManyToMany
