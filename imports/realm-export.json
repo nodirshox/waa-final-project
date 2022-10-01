@@ -35,7 +35,7 @@
   "verifyEmail": false,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
-  "resetPasswordAllowed": false,
+  "resetPasswordAllowed": true,
   "editUsernameAllowed": true,
   "bruteForceProtected": false,
   "permanentLockout": false,
@@ -1467,6 +1467,30 @@
         }
       },
       {
+        "id": "5fb5aec1-bc7c-4891-a7ef-5b9ed1ca06a3",
+        "name": "Allowed Client Scopes",
+        "providerId": "allowed-client-templates",
+        "subType": "anonymous",
+        "subComponents": {},
+        "config": {
+          "allow-default-scopes": [
+            "true"
+          ]
+        }
+      },
+      {
+        "id": "b5007a98-d1d7-4c7d-85e5-938033a4ceab",
+        "name": "Max Clients Limit",
+        "providerId": "max-clients",
+        "subType": "anonymous",
+        "subComponents": {},
+        "config": {
+          "max-clients": [
+            "200"
+          ]
+        }
+      },
+      {
         "id": "b8003e33-6de0-47b0-870c-405bb44dd504",
         "name": "Trusted Hosts",
         "providerId": "trusted-hosts",
@@ -1515,44 +1539,17 @@
             "oidc-full-name-mapper"
           ]
         }
-      },
+      }
+    ],
+    "org.keycloak.userprofile.UserProfileProvider": [
       {
-        "id": "5fb5aec1-bc7c-4891-a7ef-5b9ed1ca06a3",
-        "name": "Allowed Client Scopes",
-        "providerId": "allowed-client-templates",
-        "subType": "anonymous",
+        "id": "dab00e44-5740-4102-9e60-4e112f6991cd",
+        "providerId": "declarative-user-profile",
         "subComponents": {},
-        "config": {
-          "allow-default-scopes": [
-            "true"
-          ]
-        }
-      },
-      {
-        "id": "b5007a98-d1d7-4c7d-85e5-938033a4ceab",
-        "name": "Max Clients Limit",
-        "providerId": "max-clients",
-        "subType": "anonymous",
-        "subComponents": {},
-        "config": {
-          "max-clients": [
-            "200"
-          ]
-        }
+        "config": {}
       }
     ],
     "org.keycloak.keys.KeyProvider": [
-      {
-        "id": "91a4198c-70ac-429b-b517-10ed4cdae81a",
-        "name": "rsa-generated",
-        "providerId": "rsa-generated",
-        "subComponents": {},
-        "config": {
-          "priority": [
-            "100"
-          ]
-        }
-      },
       {
         "id": "74bc476f-3a75-4681-8d0e-b2918a6474dd",
         "name": "rsa-enc-generated",
@@ -1571,6 +1568,17 @@
         "id": "5d034038-64e3-4d9f-9d39-1f9c77b86973",
         "name": "aes-generated",
         "providerId": "aes-generated",
+        "subComponents": {},
+        "config": {
+          "priority": [
+            "100"
+          ]
+        }
+      },
+      {
+        "id": "91a4198c-70ac-429b-b517-10ed4cdae81a",
+        "name": "rsa-generated",
+        "providerId": "rsa-generated",
         "subComponents": {},
         "config": {
           "priority": [

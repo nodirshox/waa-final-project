@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uz.spiders.propertymanagement.dto.requestDTO.CreateApplicationDTO;
 import uz.spiders.propertymanagement.entities.Application;
 import uz.spiders.propertymanagement.exceptions.ServerException;
 import uz.spiders.propertymanagement.messaging.EmailEventProducer;
@@ -22,11 +23,11 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final EmailEventProducer producer;
 
     @Override
-    public Application create(Long propertyId, Long userId) {
+    public Application create(Long propertyId, CreateApplicationDTO createApplicationDTO) {
         var property = propertyRepository.findById(propertyId);
-        var user = userRepository.findById(userId);
-        if(user.isPresent() && property.isPresent()){
-            Application application = new Application(property.get(), user.get());
+        var user = userRepository.getByEmail(createApplicationDTO.getEmail());
+        if(user != null && property.isPresent()){
+            Application application = new Application(property.get(), user);
 //            String ownerEmail = property.get().getOwner().getEmail();
 //            TODO: Uncomment and pass owner email as argument once security is implemented
             producer.send();
