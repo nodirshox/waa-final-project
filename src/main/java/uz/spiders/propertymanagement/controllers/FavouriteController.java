@@ -26,7 +26,7 @@ public class FavouriteController {
         return favouriteService.findAll(email);
     }
 
-    @DeleteMapping("/property/{propertyId}")
+    @PostMapping("/property/{propertyId}/remove")
     public void delete(@RequestBody DeleteFavouriteDTO deleteFavouriteDTO, @PathVariable Long propertyId) {
         favouriteService.delete(deleteFavouriteDTO, propertyId);
     }
