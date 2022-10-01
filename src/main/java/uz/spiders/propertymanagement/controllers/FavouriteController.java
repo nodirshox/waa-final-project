@@ -1,9 +1,10 @@
 package uz.spiders.propertymanagement.controllers;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
+import uz.spiders.propertymanagement.dto.requestDTO.CreateFavouriteDTO;
+import uz.spiders.propertymanagement.dto.requestDTO.DeleteFavouriteDTO;
 import uz.spiders.propertymanagement.services.FavouriteService;
 
 import java.util.List;
@@ -15,18 +16,18 @@ import java.util.List;
 public class FavouriteController {
     private final FavouriteService favouriteService;
 
-    @PostMapping("/user/{userId}/property/{propertyId}")
-    public void createFavourite(@PathVariable Long userId, @PathVariable Long propertyId) {
-        favouriteService.create(userId, propertyId);
+    @PostMapping("/property/{propertyId}")
+    public void createFavourite(@RequestBody CreateFavouriteDTO createFavouriteDTO, @PathVariable Long propertyId) {
+        favouriteService.create(createFavouriteDTO, propertyId);
     }
 
-    @GetMapping("/user/{userId}")
-    public List<PropertyDTO> findAll(@PathVariable Long userId) {
-        return favouriteService.findAll(userId);
+    @GetMapping
+    public List<PropertyDTO> findAll(@RequestParam String email) {
+        return favouriteService.findAll(email);
     }
 
-    @DeleteMapping("/user/{userId}/property/{propertyId}")
-    public void delete(@PathVariable Long userId, @PathVariable Long propertyId) {
-        favouriteService.delete(userId, propertyId);
+    @DeleteMapping("/property/{propertyId}")
+    public void delete(@RequestBody DeleteFavouriteDTO deleteFavouriteDTO, @PathVariable Long propertyId) {
+        favouriteService.delete(deleteFavouriteDTO, propertyId);
     }
 }

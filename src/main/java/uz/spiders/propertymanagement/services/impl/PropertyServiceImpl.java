@@ -19,7 +19,6 @@ import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
 import uz.spiders.propertymanagement.entities.QProperty;
 import uz.spiders.propertymanagement.entities.User;
-import uz.spiders.propertymanagement.exceptions.BadRequestException;
 import uz.spiders.propertymanagement.exceptions.ResourceNotFoundException;
 import uz.spiders.propertymanagement.repos.PropertyRepository;
 import uz.spiders.propertymanagement.repos.UserRepository;
@@ -44,7 +43,7 @@ public class PropertyServiceImpl implements PropertyService {
         User existingUser = userRepository.getByEmail(propertyDTO.getOwnerEmail());
 
         if (existingUser == null || !existingUser.getType().equals(User.UserType.OWNER)) {
-            throw new BadRequestException("User not found");
+            throw new ResourceNotFoundException("User not found");
         }
 
         propertyDTO.setCreatedAt(LocalDateTime.now());
