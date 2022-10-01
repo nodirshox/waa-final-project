@@ -34,3 +34,7 @@ INSERT INTO picture (id, aws_url, type, property_id) values (1005, 'https://waa-
 INSERT INTO picture (id, aws_url, type, property_id) values (1006, 'https://waa-project.s3.amazonaws.com/1664547767171-4.jpg', 1, 1002);
 INSERT INTO picture (id, aws_url, type, property_id) values (1007, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 0, 1002);
 INSERT INTO picture (id, aws_url, type, property_id) values (1008, 'https://waa-project.s3.amazonaws.com/1664543468022-2.jpg', 1, 1003);
+
+/* USER FAVOURITES PROPERTIES */
+INSERT INTO users_favourite_properties(users_id, favourite_properties_id) values (2001, 1002);
+INSERT INTO users_favourite_properties(users_id, favourite_properties_id) values (2001, 1003);
