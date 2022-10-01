@@ -13,6 +13,7 @@ import uz.spiders.propertymanagement.dto.AddressDTO;
 import uz.spiders.propertymanagement.dto.PictureDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
+import uz.spiders.propertymanagement.dto.requestDTO.GetOwnerPropertiesDTO;
 import uz.spiders.propertymanagement.entities.Picture;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
@@ -189,5 +190,21 @@ public class PropertyServiceImpl implements PropertyService {
         }
 
         return mapper.map(property, PropertyDTO.class);
+    }
+
+    @Override
+    public List<Property> findOwnerProperties(GetOwnerPropertiesDTO getOwnerPropertiesDTO) {
+        User user = userRepository.getByEmail(getOwnerPropertiesDTO.getEmail());
+        if (user == null) {
+            throw new ResourceNotFoundException("Use not found");
+        }
+        List<Property> ownerProperties = new ArrayList<>();
+        List<Property> properties = propertyRepository.findAll();
+        for (Property property: properties) {
+            if (property.getOwner().equals(user)) {
+                ownerProperties.add(property);
+            }
+        }
+        return ownerProperties;
     }
 }

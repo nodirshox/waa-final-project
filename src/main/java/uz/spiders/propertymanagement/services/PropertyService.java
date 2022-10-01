@@ -7,6 +7,7 @@ import uz.spiders.propertymanagement.dto.AddressDTO;
 import uz.spiders.propertymanagement.dto.PictureDTO;
 import uz.spiders.propertymanagement.dto.PropertyDTO;
 import uz.spiders.propertymanagement.dto.PropertyPartialUpdateDTO;
+import uz.spiders.propertymanagement.dto.requestDTO.GetOwnerPropertiesDTO;
 import uz.spiders.propertymanagement.entities.Property;
 import uz.spiders.propertymanagement.entities.Property.ListingType;
 import uz.spiders.propertymanagement.entities.Property.PropertyType;
@@ -26,4 +27,6 @@ public interface PropertyService {
     PropertyDTO partialUpdate(Long id, PropertyPartialUpdateDTO propertyDTO);
 
     PropertyDTO updateImages(Long id, List<PictureDTO> pictureDTOS);
+
+    List<Property> findOwnerProperties(GetOwnerPropertiesDTO getOwnerPropertiesDTO);
 }

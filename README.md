@@ -7,6 +7,10 @@
 
 > mvn generate-sources
 
+3. Set environment variables to IDE:
+
+> AWS_S3_ACCESS_KEY=key;AWS_S3_SECRET_KEY=key
+
 3. Install Docker Compose in machine
 
 > https://docs.docker.com/compose/install/
