@@ -1,4 +1,10 @@
-# Run Project
+# Rental Property Portal
+
+Implemented using Java Spring Boot.
+
+[Client side](https://github.com/nodirshox/waa-final-project-client)
+
+## Run Project
 
 1. Mark('target/generated-source') directory as **"Sources Root"** by clicking right button of mouse
 
