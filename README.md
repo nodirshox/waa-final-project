@@ -1,13 +1,16 @@
-# Rental Property Portal
+# Property Management Portal
 
 Implemented using Java Spring Boot.
 
+[Requirements](TASK.md)
+
 [Client side](https://github.com/nodirshox/waa-final-project-client)
+
+![ERD Diagram](/imports/diagram.jpg "ERD Diagram")
 
 ## Run Project
 
 1. Mark('target/generated-source') directory as **"Sources Root"** by clicking right button of mouse
-
 
 2. Run following command
 
